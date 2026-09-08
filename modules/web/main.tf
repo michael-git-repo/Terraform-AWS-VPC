@@ -142,7 +142,35 @@ resource "aws_launch_template" "this" {
     dnf install -y nginx
     mkdir -p /usr/share/nginx/html
     cat > /usr/share/nginx/html/index.html <<'HTML'
-    <!doctype html><html><body><h1>Secure Terraform Web Lab</h1><p>Served from a private EC2 instance behind an ALB.</p></body></html>
+    <!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Secure Terraform Web Lab</title>
+        <style>
+          :root { color-scheme: dark; font-family: system-ui, sans-serif; }
+          body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #0f172a; color: #e2e8f0; }
+          main { width: min(680px, 90%); padding: 3rem; border: 1px solid #334155; border-radius: 1rem; background: #1e293b; box-shadow: 0 1rem 3rem #02061799; }
+          .badge { display: inline-block; padding: .35rem .7rem; border-radius: 999px; background: #14532d; color: #bbf7d0; font-size: .85rem; font-weight: 700; }
+          h1 { margin-bottom: .75rem; font-size: clamp(2rem, 6vw, 3.5rem); }
+          p { color: #cbd5e1; line-height: 1.6; }
+          ul { padding-left: 1.2rem; color: #bfdbfe; line-height: 2; }
+        </style>
+      </head>
+      <body>
+        <main>
+          <span class="badge">Infrastructure is working</span>
+          <h1>Secure Terraform Web Lab</h1>
+          <p>Your request reached a private EC2 web server through the public Application Load Balancer.</p>
+          <ul>
+            <li>Terraform-managed AWS infrastructure</li>
+            <li>Private EC2 instance with SSM access</li>
+            <li>ALB health check: <strong>healthy</strong></li>
+          </ul>
+        </main>
+      </body>
+    </html>
     HTML
     echo 'ok' > /usr/share/nginx/html/health
     systemctl enable --now nginx
