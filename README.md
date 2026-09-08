@@ -24,6 +24,8 @@ NAT gateway: outbound-only instance access
 
 The lab defaults to one NAT gateway to reduce cost. Set `nat_gateway_per_az = true` for better AZ isolation at increased cost.
 
+For a detailed AWS Console and Terraform state resource reference, see [`docs/AWS-RESOURCES.md`](docs/AWS-RESOURCES.md).
+
 ## Prerequisites
 
 - Terraform 1.10 or newer
