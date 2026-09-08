@@ -1,0 +1,21 @@
+aws_region  = "us-east-1"
+project_name = "secure-web"
+environment  = "lab"
+
+# Keep the default one NAT gateway for a lower-cost lab.
+nat_gateway_per_az = false
+
+# Replace with trusted CIDRs for anything beyond a short-lived demo.
+allowed_alb_cidrs = ["0.0.0.0/0"]
+
+instance_type   = "t3.micro"
+desired_capacity = 2
+min_size         = 2
+max_size         = 4
+
+# Set an ACM certificate ARN to enable HTTPS and HTTP-to-HTTPS redirect.
+acm_certificate_arn = null
+
+tags = {
+  Owner = "platform-team"
+}
