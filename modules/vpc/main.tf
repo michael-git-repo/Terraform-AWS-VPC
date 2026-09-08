@@ -1,5 +1,5 @@
 locals {
-  az_count = length(var.availability_zones)
+  az_count  = length(var.availability_zones)
   nat_count = var.nat_gateway_per_az ? local.az_count : 1
 }
 
