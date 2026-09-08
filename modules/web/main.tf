@@ -149,17 +149,61 @@ resource "aws_launch_template" "this" {
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Secure Terraform Web Lab</title>
         <style>
-          :root { color-scheme: dark; font-family: system-ui, sans-serif; }
-          body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #0f172a; color: #e2e8f0; }
-          main { width: min(680px, 90%); padding: 3rem; border: 1px solid #334155; border-radius: 1rem; background: #1e293b; box-shadow: 0 1rem 3rem #02061799; }
-          .badge { display: inline-block; padding: .35rem .7rem; border-radius: 999px; background: #14532d; color: #bbf7d0; font-size: .85rem; font-weight: 700; }
-          h1 { margin-bottom: .75rem; font-size: clamp(2rem, 6vw, 3.5rem); }
-          p { color: #cbd5e1; line-height: 1.6; }
-          ul { padding-left: 1.2rem; color: #bfdbfe; line-height: 2; }
+          :root {
+            color-scheme: dark;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #07111f;
+            color: #f8fafc;
+          }
+          * { box-sizing: border-box; }
+          body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 2rem 1rem;
+            background:
+              radial-gradient(circle at 15% 15%, #2563eb55 0, transparent 32%),
+              radial-gradient(circle at 85% 85%, #14b8a655 0, transparent 30%),
+              linear-gradient(135deg, #07111f 0%, #101d35 48%, #0b2531 100%);
+          }
+          main {
+            position: relative;
+            overflow: hidden;
+            width: min(760px, 100%);
+            padding: clamp(2rem, 6vw, 4.5rem);
+            border: 1px solid #ffffff22;
+            border-radius: 1.75rem;
+            background: linear-gradient(145deg, #172a46dd, #0f1c31dd);
+            box-shadow: 0 2rem 5rem #02061788, inset 0 1px #ffffff1a;
+            backdrop-filter: blur(18px);
+          }
+          main::after {
+            content: "";
+            position: absolute;
+            width: 15rem;
+            height: 15rem;
+            top: -9rem;
+            right: -6rem;
+            border-radius: 50%;
+            background: #38bdf822;
+            filter: blur(8px);
+          }
+          .eyebrow { margin: 0 0 1.25rem; color: #7dd3fc; font-size: .78rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+          .badge { display: inline-flex; align-items: center; gap: .55rem; padding: .5rem .8rem; border: 1px solid #34d39955; border-radius: 999px; background: #064e3b66; color: #a7f3d0; font-size: .85rem; font-weight: 750; }
+          .badge::before { content: ""; width: .55rem; height: .55rem; border-radius: 50%; background: #34d399; box-shadow: 0 0 .75rem #34d399; }
+          h1 { max-width: 12ch; margin: 1.4rem 0 1rem; color: #f8fafc; font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 800; letter-spacing: -.065em; line-height: .98; }
+          p { max-width: 54ch; margin: 0; color: #bfd0e5; font-size: clamp(1rem, 2vw, 1.15rem); line-height: 1.7; }
+          ul { display: grid; gap: .8rem; margin: 2rem 0 0; padding: 1.25rem 1.25rem 1.25rem 2.5rem; border: 1px solid #ffffff12; border-radius: 1rem; background: #02061733; color: #dbeafe; line-height: 1.5; }
+          li::marker { color: #67e8f9; }
+          strong { color: #86efac; }
+          .footer { margin-top: 1.75rem; color: #7f9bb8; font-size: .8rem; letter-spacing: .04em; }
+          @media (max-width: 520px) { main { border-radius: 1.25rem; } h1 { font-size: 3.25rem; } }
         </style>
       </head>
       <body>
         <main>
+          <p class="eyebrow">AWS infrastructure as code</p>
           <span class="badge">Infrastructure is working</span>
           <h1>Secure Terraform Web Lab</h1>
           <p>Your request reached a private EC2 web server through the public Application Load Balancer.</p>
@@ -168,6 +212,7 @@ resource "aws_launch_template" "this" {
             <li>Private EC2 instance with SSM access</li>
             <li>ALB health check: <strong>healthy</strong></li>
           </ul>
+          <div class="footer">Built with Terraform · Protected by AWS networking</div>
         </main>
       </body>
     </html>
