@@ -16,6 +16,7 @@ The deployed lab uses:
 - **Public endpoint:** `secure-web-alb-1414872637.us-east-1.elb.amazonaws.com`
 
 Always select `us-east-1` in the AWS Console before searching for these resources.
+---
 
 ## Architecture
 
@@ -31,6 +32,7 @@ Private EC2 Auto Scaling Group
    v
 NAT Gateway for outbound traffic
 ```
+---
 
 Users can reach the ALB. The EC2 instances do not have public IP addresses and are reachable by the ALB and AWS Systems Manager.
 
@@ -50,6 +52,7 @@ Users can reach the ALB. The EC2 instances do not have public IP addresses and a
 | Elastic IP for NAT | `secure-web-nat-eip-1` | EC2 → Elastic IPs |
 
 With `nat_gateway_per_az = true`, Terraform creates one NAT gateway, EIP, and private route table per availability zone.
+---
 
 ### Security — `modules/security`
 
@@ -59,6 +62,8 @@ With `nat_gateway_per_az = true`, Terraform creates one NAT gateway, EIP, and pr
 | Web security group | `secure-web-web-sg` | Allows port 80 only from the ALB security group |
 
 There is intentionally no public SSH rule. Administration uses Systems Manager Session Manager.
+
+---
 
 ### Web tier — `modules/web`
 
@@ -82,6 +87,7 @@ The launch template configures:
 - IMDSv2 required
 - SSM managed-instance permissions
 - `/health` endpoint for the ALB
+---
 
 ## Find everything Terraform manages
 
@@ -106,6 +112,7 @@ View Terraform outputs:
 terraform output
 terraform output -raw alb_dns_name
 ```
+---
 
 ## Find resources by tags
 
@@ -128,6 +135,7 @@ tag:Project=secure-web
 ```
 
 Some resource types may not appear in Resource Explorer immediately. In that case, use the service-specific console pages listed above.
+---
 
 ## Remote state resources
 
@@ -142,6 +150,7 @@ The separate `bootstrap/` stack creates the S3 state bucket:
 - Native S3 lock file: enabled
 
 Find the bucket at **S3 → General purpose buckets**. Do not manually delete or edit the state object while Terraform is running.
+---
 
 ## Costs and cleanup
 
@@ -159,6 +168,7 @@ terraform destroy
 ```
 
 Destroy the root stack before touching the bootstrap stack. The state bucket has `prevent_destroy = true`; keep it if the project may be reused. If it must be removed, first remove that protection intentionally, then delete the bucket and its object versions according to your retention policy.
+---
 
 ## Operational checks
 
