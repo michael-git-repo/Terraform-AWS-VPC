@@ -12,8 +12,3 @@ output "autoscaling_group_name" {
   description = "Web Auto Scaling Group name."
   value       = aws_autoscaling_group.this.name
 }
-
-output "autoscaling_group_name" {
-  description = "Web Auto Scaling Group name."
-  value       = aws_autoscaling_group.this.name
-}
